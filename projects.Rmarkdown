@@ -1,0 +1,33 @@
+---
+title: "Projects"
+output:
+  html_document:
+    css: "css/strapless.css"
+---
+
+
+```{r, echo=F}
+# todo
+# arrange by date
+# links should be nested in projects/
+# image is not found
+
+library(dplyr)
+library(readr)
+library(lubridate)
+data <- read_csv("projectlist.csv")
+data$date <- dmy(data$date)
+
+data %>% 
+  arrange(desc(date)) %>%
+  bs4cards::cards(
+    .,
+    title = long_name,
+    link = projectpage_url,
+    image = image_url,
+    layout = "label-below"
+    #layout = "label-right",
+    #text = blurb
+  )
+```
+
